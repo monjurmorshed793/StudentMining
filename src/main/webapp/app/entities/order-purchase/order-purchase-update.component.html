@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+            <h2 id="jhi-order-purchase-heading">Create or edit a Order Purchase</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!orderPurchase.id">
+                    <label for="id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"
+                        [(ngModel)]="orderPurchase.id" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_orderDate">Order Date</label>
+                    <div class="input-group">
+                        <input id="field_orderDate" type="text" class="form-control" name="orderDate" ngbDatepicker  #orderDateDp="ngbDatepicker" [(ngModel)]="orderPurchase.orderDate"
+                        />
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="orderDateDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="field_orderAmount">Order Amount</label>
+                    <input type="number" class="form-control" name="orderAmount" id="field_orderAmount"
+                        [(ngModel)]="orderPurchase.orderAmount" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" for="field_customer">Customer</label>
+                    <select class="form-control" id="field_customer" name="customer" [(ngModel)]="orderPurchase.customer" >
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="customerOption.id === orderPurchase.customer?.id ? orderPurchase.customer : customerOption" *ngFor="let customerOption of customers; trackBy: trackCustomerById">{{customerOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span>Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span>Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
