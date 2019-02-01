@@ -20,6 +20,7 @@ import * as moment from 'moment';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import { JhiMainComponent, NavbarComponent, FooterComponent, PageRibbonComponent, ErrorComponent } from './layouts';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import { FileSelectDirective } from 'ng2-file-upload';
         StudentMiningAccountModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
         StudentMiningEntityModule,
-        StudentMiningAppRoutingModule
+        StudentMiningAppRoutingModule,
+        AngularFileUploaderModule
     ],
     declarations: [JhiMainComponent, NavbarComponent, ErrorComponent, PageRibbonComponent, FooterComponent, FileSelectDirective],
     providers: [

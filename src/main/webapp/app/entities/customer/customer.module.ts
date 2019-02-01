@@ -12,18 +12,18 @@ import {
     customerPopupRoute
 } from './';
 import { FileSelectDirective } from 'ng2-file-upload';
+import { AngularFileUploaderModule } from 'angular-file-uploader';
 
 const ENTITY_STATES = [...customerRoute, ...customerPopupRoute];
 
 @NgModule({
-    imports: [StudentMiningSharedModule, RouterModule.forChild(ENTITY_STATES)],
+    imports: [StudentMiningSharedModule, AngularFileUploaderModule, RouterModule.forChild(ENTITY_STATES)],
     declarations: [
         CustomerComponent,
         CustomerDetailComponent,
         CustomerUpdateComponent,
         CustomerDeleteDialogComponent,
-        CustomerDeletePopupComponent,
-        FileSelectDirective
+        CustomerDeletePopupComponent
     ],
     entryComponents: [CustomerComponent, CustomerUpdateComponent, CustomerDeleteDialogComponent, CustomerDeletePopupComponent],
     schemas: [CUSTOM_ELEMENTS_SCHEMA]
