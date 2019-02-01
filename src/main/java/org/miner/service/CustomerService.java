@@ -11,6 +11,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 import static org.elasticsearch.index.query.QueryBuilders.*;
@@ -44,6 +45,13 @@ public class CustomerService {
         Customer result = customerRepository.save(customer);
         customerSearchRepository.save(result);
         return result;
+    }
+
+    public List<Customer> save(List<Customer> customers){
+        log.debug("Request to save a List of Customer");
+        List<Customer> results= customerRepository.saveAll(customers);
+        customerSearchRepository.saveAll(results);
+        return results;
     }
 
     /**

@@ -95,17 +95,17 @@ public class CustomerResourceIntTest {
 
     private Customer customer;
 
-    @Before
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final CustomerResource customerResource = new CustomerResource(customerService);
-        this.restCustomerMockMvc = MockMvcBuilders.standaloneSetup(customerResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
+//    @Before
+//    public void setup() {
+//        MockitoAnnotations.initMocks(this);
+//        final CustomerResource customerResource = new CustomerResource(customerService);
+//        this.restCustomerMockMvc = MockMvcBuilders.standaloneSetup(customerResource)
+//            .setCustomArgumentResolvers(pageableArgumentResolver)
+//            .setControllerAdvice(exceptionTranslator)
+//            .setConversionService(createFormattingConversionService())
+//            .setMessageConverters(jacksonMessageConverter)
+//            .setValidator(validator).build();
+//    }
 
     /**
      * Create an entity for this test.

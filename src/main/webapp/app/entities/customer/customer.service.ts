@@ -20,6 +20,10 @@ export class CustomerService {
         return this.http.post<ICustomer>(this.resourceUrl, customer, { observe: 'response' });
     }
 
+    upload(file: any): Observable<any> {
+        return this.http.post<any>(`${this.resourceUrl}/upload`, file, { observe: 'response' });
+    }
+
     update(customer: ICustomer): Observable<EntityResponseType> {
         return this.http.put<ICustomer>(this.resourceUrl, customer, { observe: 'response' });
     }

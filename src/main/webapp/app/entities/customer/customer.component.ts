@@ -30,6 +30,7 @@ export class CustomerComponent implements OnInit, OnDestroy {
     predicate: any;
     previousPage: any;
     reverse: any;
+    file: any;
 
     constructor(
         protected customerService: CustomerService,
@@ -85,6 +86,11 @@ export class CustomerComponent implements OnInit, OnDestroy {
             this.previousPage = page;
             this.transition();
         }
+    }
+
+    fileUploaded() {
+        this.customerService.upload(this.file);
+        this.loadAll();
     }
 
     transition() {

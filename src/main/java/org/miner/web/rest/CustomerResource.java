@@ -1,6 +1,7 @@
 package org.miner.web.rest;
 import org.miner.domain.Customer;
 import org.miner.service.CustomerService;
+import org.miner.service.ParseService;
 import org.miner.web.rest.errors.BadRequestAlertException;
 import org.miner.web.rest.util.HeaderUtil;
 import org.miner.web.rest.util.PaginationUtil;
@@ -14,6 +15,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.File;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -36,8 +38,12 @@ public class CustomerResource {
 
     private final CustomerService customerService;
 
-    public CustomerResource(CustomerService customerService) {
+    private final ParseService parseService;
+
+
+    public CustomerResource(CustomerService customerService, ParseService parseService) {
         this.customerService = customerService;
+        this.parseService = parseService;
     }
 
     /**
@@ -57,6 +63,16 @@ public class CustomerResource {
         return ResponseEntity.created(new URI("/api/customers/" + result.getId()))
             .headers(HeaderUtil.createEntityCreationAlert(ENTITY_NAME, result.getId().toString()))
             .body(result);
+    }
+
+    @PostMapping("/upload")
+    public ResponseEntity<List<Customer>> uploadFile(@RequestBody File file, Pageable pageable) throws URISyntaxException, Exception{
+        log.debug("REST request to upload a excel file named: {}", file.getName());
+        String fileName = file.getName();
+        if(fileName.contains(".xls") || fileName.contains(".xlxs"))
+            parseService.extractWorkbook(file);
+
+        return getAllCustomers(pageable);
     }
 
     /**
@@ -79,6 +95,7 @@ public class CustomerResource {
             .headers(HeaderUtil.createEntityUpdateAlert(ENTITY_NAME, customer.getId().toString()))
             .body(result);
     }
+
 
     /**
      * GET  /customers : get all the customers.
